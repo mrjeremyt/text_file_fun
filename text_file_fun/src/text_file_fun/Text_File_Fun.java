@@ -4,11 +4,11 @@ import java.util.*;
 
 
 class Text_File_Formats{
-	File file_extensions;
-	ArrayList<String> extns;
+	File file_extensions = null;
+	ArrayList<String> extns = null;
 	
 	public Text_File_Formats() {
-		file_extensions = new File("text_file_listing");
+		file_extensions = new File("C:/Users/Jeremy/git/text_file_fun/text_file_fun/src/text_file_fun/text_file_listing.txt");
 		extns = new ArrayList<String>();
 	}
 	
@@ -46,9 +46,10 @@ public class Text_File_Fun {
 		} catch (FileNotFoundException e) {
 			throw new FileNotFoundException("Input file is incorrect."); 
 		}
+	
 		
-		
-		
+		Text_File_Formats testing = new Text_File_Formats();
+		testing.print_all_extns();
 
 	}
 
