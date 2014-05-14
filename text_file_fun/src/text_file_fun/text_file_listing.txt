@@ -1,0 +1,65 @@
+602 – Text602 document
+ABW – AbiWord Document
+ACL – MS Word AutoCorrect List
+AFP – Advanced Function Presentation – IBc
+AMI – Lostus Ami Pro Amigaguide
+ANS – American National Standards Institute (ANSI) text
+ASC – ASCII text
+AWW – Ability Write
+CCF – Color Chat 1.0
+CSV – ASCII text as comma-separated values, used in spreadsheets and database management systems
+CWK – ClarisWorks / AppleWorks document
+DBK - DocBook XML sub-format
+DOC – Microsoft Word document
+DOCM - Microsoft Word for Mac document
+DOCX – Office Open XML document
+DOT – Microsoft Word document template
+DOTX – Office Open XML text document template
+EGT – EGT Universal Document
+EPUB - EPUB open standard for e-books
+EZW - Reagency Systems easyOFFER document[2]
+FDX – Final Návrh
+FTM – Fielded Text Meta
+FTX – Fielded Text (Declared)
+GDOC – Google Drive Document
+HTML – HyperText Markup Language (.html, .htm)
+HWP – Haansoft (Hancom) Hangul Word Processor document
+HWPML – Haansoft (Hancom) Hangul Word Processor Markup Language document
+LWP – Lotus Word Pro
+MBP – metadata for Mobipocket documents
+MD – Markdown text document
+MCW – Microsoft Word for Macintosh (versions 4.0–5.1)
+Mobi – Mobipocket documents
+NB – Mathematica Notebook
+NBP – Mathematica Player Notebook
+ODM – OpenDocument master document
+ODT – OpenDocument text document
+OTT – OpenDocument text document template
+OMM – OmmWriter text document
+PAGES – Apple Pages document
+PAP – Papyrus word processor document
+PDAX – Portable Document Archive (PDA) document index file
+PDF – Portable Document Format
+Radix -64
+RTF – Rich Text document
+QUOX – Question Object File Format for Quobject Designer or Quobject Explorer
+RPT – Crystal Reports
+SDW – StarWriter text document, used in earlier versions of StarOffice
+STW – OpenOffice.org XML (obsolete) text document template
+Sxw – OpenOffice.org XML (obsolete) text document
+TeX – TEX
+INFO – Texinfo
+Troff
+TXT – ASCII nebo Unicode plaintext Text file
+UOF – Uniform Office Format
+UOML – Unique Object Markup Language
+VIA – Revoware VIA Document Project File
+WPD – WordPerfect document
+WPS – Microsoft Works document
+WPT – Microsoft Works document template
+WRD – WordIt! document
+WRF – ThinkFree Write
+WRI – Microsoft Write document
+XHTML (xhtml, XHT..) – eXtensible Hyper-Text Markup Language
+XML – eXtensible Markup Language
+XPS – Open XML Paper Specification
