@@ -1,13 +1,14 @@
 package text_file_fun;
 import java.io.*;
 import java.util.*;
+
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 
 
 class Text_File_Formats{
-	File file_extensions = null;
-	ArrayList<String> extns = null;
+	private File file_extensions = null;
+	private ArrayList<String> extns = null;
 	
 	public Text_File_Formats() {
 		file_extensions = new File("C:/Users/Jeremy/git/text_file_fun/text_file_fun/src/text_file_fun/text_file_listing.txt");
@@ -16,22 +17,22 @@ class Text_File_Formats{
 	
 	protected ArrayList<String> list_of_extns() throws FileNotFoundException{
 		Scanner sc = new Scanner(file_extensions);
-
 		while(sc.hasNextLine()){
 			String ext = sc.nextLine();
 			String delim = "[ ]+";
 			String[] tokens = ext.split(delim);
 			extns.add(tokens[0]);
-		}		
+		}
+		sc.close();
 		return extns;
 	}
 	
 	protected void print_all_extns() throws FileNotFoundException{
 		Scanner sc = new Scanner(file_extensions);
-		
 		while(sc.hasNextLine()){
 		 System.out.println(sc.nextLine());
 		}
+		sc.close();
 	}
 }
 
@@ -44,9 +45,9 @@ public class Text_File_Fun {
 	public static final int Increasing_Popularity = 5;
 	public static final int Decreasing_Popularity = 6;
 	public static final int You_Choose_Num_Letters = 7;
-	public static final int QUIT = 8;
+	public static final int QUIT = 0 ;
 	
-	/*MAIN  METHOD ******************************************************************************************************/
+	/*MAIN  METHOD ***********************************************************************************************************/
 	public static void main(String[] args) throws FileNotFoundException {
 		
 		try {
@@ -61,18 +62,20 @@ public class Text_File_Fun {
 		    System.out.println("Opening GUI to choose file...");
 		    // next line for GUI
 		    //grab the input file
-		    Scanner fileScanner = new Scanner(getFile());
+		    File file = getFile();
+		    //Scanner fileScanner = new Scanner(file);
 		    int choice;
 			Scanner keyboard = new Scanner(System.in);
-			fileScanner.close();
+			//fileScanner.close();
 	
-			int n;
-//			Text_File_Formats testing = new Text_File_Formats();
-//			testing.print_all_extns();
+			boolean valid_extn = check_valid_extn(file);
+			
 		    
 			do {
 				showMenu();
 				choice = getChoice(keyboard);
+				if(valid_extn ==  false)
+					 choice = QUIT;
 				if( choice == SEARCH)
 					return;
 				else{
@@ -82,13 +85,31 @@ public class Text_File_Fun {
 
 			} while( choice != QUIT);
 		    
-		    
+		    keyboard.close();
 		    
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("Problem reading the data file. Exiting the program." + e);
 		}
 		
+	}
+	
+	private static boolean check_valid_extn(File file) throws FileNotFoundException{
+		Text_File_Formats testing = new Text_File_Formats();
+//		testing.print_all_extns(); 
+		
+		String file_name = file.getName();
+		String delim = "[.]+";
+		String[] tokens = file_name.split(delim);
+		//System.out.println(tokens.length);
+		ArrayList<String> extn_list = testing.list_of_extns();
+		Boolean valid_extn = false;
+		
+		for(int i = 0; i < extn_list.size(); i++){
+			if(extn_list.get(i) == tokens[1])
+				valid_extn = true;
+		}
+		return valid_extn;
 	}
 	
 	private static int getInt(Scanner s, String prompt) {
@@ -104,7 +125,7 @@ public class Text_File_Fun {
 	private static int getChoice(Scanner keyboard) {
 		int choice = getInt(keyboard, "Enter choice: ");
 		keyboard.nextLine();
-		while( choice < SEARCH || choice > QUIT){
+		while( choice < QUIT || choice > SEARCH){
 			System.out.println("\n" + choice + " is not a valid choice");
 			choice = getInt(keyboard, "Enter choice: ");
 			keyboard.nextLine();
@@ -116,12 +137,6 @@ public class Text_File_Fun {
 	private static void showMenu() {
 		System.out.println("\nOptions:");
 		System.out.println("Enter " + SEARCH + " to search for names.");
-		System.out.println("Enter " + ONE_NAME + " to display data for one name.");
-		System.out.println("Enter " + APPEAR_ONCE+ " to display all names that appear in only one decade.");
-		System.out.println("Enter " + APPEAR_ALWAYS + " to display all names that appear in all decades.");
-		System.out.println("Enter " + Increasing_Popularity + " to display all the names that increase in popularity over all the decades.");
-		System.out.println("Enter " + Decreasing_Popularity + " to display all the names that decrease in popularity over all the decades.");
-		System.out.println("Enter " + You_Choose_Num_Letters + " to display all the names that have 5 letters or more in the name.");
 		System.out.println("Enter " + QUIT + " to quit.\n");
 	}
 	
