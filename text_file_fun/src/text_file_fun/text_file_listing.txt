@@ -6,7 +6,9 @@ AMI – Lostus Ami Pro Amigaguide
 ANS – American National Standards Institute (ANSI) text
 ASC – ASCII text
 AWW – Ability Write
+C - C text file
 CCF – Color Chat 1.0
+CPP - C++ text file
 CSV – ASCII text as comma-separated values, used in spreadsheets and database management systems
 CWK – ClarisWorks / AppleWorks document
 DBK - DocBook XML sub-format
@@ -25,6 +27,7 @@ GDOC – Google Drive Document
 HTML – HyperText Markup Language (.html, .htm)
 HWP – Haansoft (Hancom) Hangul Word Processor document
 HWPML – Haansoft (Hancom) Hangul Word Processor Markup Language document
+JAVA - Java text file
 LWP – Lotus Word Pro
 MBP – metadata for Mobipocket documents
 MD – Markdown text document
@@ -40,6 +43,7 @@ PAGES – Apple Pages document
 PAP – Papyrus word processor document
 PDAX – Portable Document Archive (PDA) document index file
 PDF – Portable Document Format
+PY - Python text file
 Radix -64
 RTF – Rich Text document
 QUOX – Question Object File Format for Quobject Designer or Quobject Explorer
@@ -49,7 +53,6 @@ STW – OpenOffice.org XML (obsolete) text document template
 Sxw – OpenOffice.org XML (obsolete) text document
 TeX – TEX
 INFO – Texinfo
-Troff
 TXT – ASCII nebo Unicode plaintext Text file
 UOF – Uniform Office Format
 UOML – Unique Object Markup Language
@@ -60,6 +63,6 @@ WPT – Microsoft Works document template
 WRD – WordIt! document
 WRF – ThinkFree Write
 WRI – Microsoft Write document
-XHTML (xhtml, XHT..) – eXtensible Hyper-Text Markup Language
+XHTML - (xhtml, XHT..) eXtensible Hyper-Text Markup Language
 XML – eXtensible Markup Language
 XPS – Open XML Paper Specification

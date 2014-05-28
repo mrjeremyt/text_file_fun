@@ -21,7 +21,7 @@ class Text_File_Formats{
 			String ext = sc.nextLine();
 			String delim = "[ ]+";
 			String[] tokens = ext.split(delim);
-			extns.add(tokens[0]);
+			extns.add(tokens[0].toLowerCase());
 		}
 		sc.close();
 		return extns;
@@ -38,13 +38,12 @@ class Text_File_Formats{
 
 public class Text_File_Fun {
 
-	public static final int SEARCH = 1;
-	public static final int ONE_NAME = 2;
-	public static final int APPEAR_ONCE = 3;
-	public static final int APPEAR_ALWAYS = 4;
-	public static final int Increasing_Popularity = 5;
-	public static final int Decreasing_Popularity = 6;
-	public static final int You_Choose_Num_Letters = 7;
+	public static final int GET_FILE = 1;
+	public static final int EXTN = 2;
+	public static final int EXTN_LIST = 3;
+	public static final int SEARCH = 4;
+	public static final int LETTERS_AND_FREQ = 5;
+	public static final int WORDS_AND_FREQ = 6;
 	public static final int QUIT = 0 ;
 	
 	/*MAIN  METHOD ***********************************************************************************************************/
@@ -58,56 +57,47 @@ public class Text_File_Fun {
 		    		"Continuing with default Java look and feel.");
 		}
 		
-		try {
-		    System.out.println("Opening GUI to choose file...");
-		    // next line for GUI
-		    //grab the input file
-		    File file = getFile();
-		    //Scanner fileScanner = new Scanner(file);
-		    int choice;
-			Scanner keyboard = new Scanner(System.in);
-			//fileScanner.close();
-	
-			boolean valid_extn = check_valid_extn(file);
-			
-		    
-			do {
-				showMenu();
-				choice = getChoice(keyboard);
-				if(valid_extn ==  false)
-					 choice = QUIT;
-				if( choice == SEARCH)
-					return;
-				else{
-					//System.out.println();
-					System.out.println("\nGoodbye.");
-				}
 
-			} while( choice != QUIT);
+		File file;
+	    int choice;
+		Scanner keyboard = new Scanner(System.in);
+		boolean valid_extn = true;
+	    
+		do {
+			showMenu();
+			choice = getChoice(keyboard);
+			if( choice == GET_FILE){
+				System.out.println("Opening GUI to choose file...");
+				file = getFile();
+				valid_extn = check_valid_extn(file);
+			}
+			else{
+				//System.out.println();
+				System.out.println("\nGoodbye.");
+			}
+			if(valid_extn == false){
+				choice = QUIT;
+				System.out.println("\nNot a valid file extension, Goodbye.");
+			}
+		} while( choice != QUIT);
+	    
+	    keyboard.close();
 		    
-		    keyboard.close();
-		    
-		}
-		catch(FileNotFoundException e) {
-			System.out.println("Problem reading the data file. Exiting the program." + e);
-		}
 		
 	}
 	
 	private static boolean check_valid_extn(File file) throws FileNotFoundException{
 		Text_File_Formats testing = new Text_File_Formats();
-//		testing.print_all_extns(); 
-		
 		String file_name = file.getName();
 		String delim = "[.]+";
 		String[] tokens = file_name.split(delim);
-		//System.out.println(tokens.length);
 		ArrayList<String> extn_list = testing.list_of_extns();
 		Boolean valid_extn = false;
 		
 		for(int i = 0; i < extn_list.size(); i++){
-			if(extn_list.get(i) == tokens[1])
+			if(extn_list.get(i).equalsIgnoreCase(tokens[1])){
 				valid_extn = true;
+			}
 		}
 		return valid_extn;
 	}
@@ -125,7 +115,7 @@ public class Text_File_Fun {
 	private static int getChoice(Scanner keyboard) {
 		int choice = getInt(keyboard, "Enter choice: ");
 		keyboard.nextLine();
-		while( choice < QUIT || choice > SEARCH){
+		while( choice < QUIT || choice > WORDS_AND_FREQ){
 			System.out.println("\n" + choice + " is not a valid choice");
 			choice = getInt(keyboard, "Enter choice: ");
 			keyboard.nextLine();
@@ -136,9 +126,15 @@ public class Text_File_Fun {
 	
 	private static void showMenu() {
 		System.out.println("\nOptions:");
-		System.out.println("Enter " + SEARCH + " to search for names.");
+		System.out.println("Enter " + GET_FILE + " to retreive the file to evaluate.");
+		System.out.println("Enter " + EXTN + " to see the file extenstion that we detected.");
+		System.out.println("Enter " + EXTN_LIST + " to see a list of viable file extensions.");
+		System.out.println("Enter " + SEARCH + " to search for a particular word in this document.");
+		System.out.println("Enter " + LETTERS_AND_FREQ + " to see a list of letters and their frequency.");
+		System.out.println("Enter " + WORDS_AND_FREQ + " to see a list of words and their frequency.");
 		System.out.println("Enter " + QUIT + " to quit.\n");
 	}
+	
 	
 	public static File getFile() {
         // create a GUI window to pick the text to evaluate
