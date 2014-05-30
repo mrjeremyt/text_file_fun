@@ -37,7 +37,7 @@ class Text_File_Formats{
 	
 	protected void all_extns_to_file() throws FileNotFoundException{
 		Scanner sc = new Scanner(file_extensions);
-		PrintWriter file = new PrintWriter("C:/Users/Jeremy/Desktop/viable_file_extensions.txt");
+		PrintWriter file = new PrintWriter(System.getProperty("user.home") + "/Desktop/viable_file_extensions.txt");
 		while(sc.hasNextLine()){
 			file.println(sc.nextLine());
 		}
@@ -51,9 +51,9 @@ public class Text_File_Fun {
 	public static final int GET_FILE = 1;
 	public static final int EXTN = 2;
 	public static final int EXTN_LIST = 3;
-	public static final int SEARCH = 4;
+	public static final int WORDS_AND_FREQ = 4;
 	public static final int LETTERS_AND_FREQ = 5;
-	public static final int WORDS_AND_FREQ = 6;
+	public static final int SEARCH = 6;
 	public static final int QUIT = 0 ;
 	
 	/*MAIN  METHOD ***********************************************************************************************************/
@@ -84,6 +84,12 @@ public class Text_File_Fun {
 				file_extn_return(file, keyboard);
 			}else if(choice == EXTN_LIST){
 				file_extn_list(keyboard);
+			}else if(choice == WORDS_AND_FREQ){
+				words__and_frequency(keyboard, file);
+			}else if(choice ==LETTERS_AND_FREQ){
+				letters_and_frequency(keyboard, file);
+			}else if(choice == SEARCH){
+				search(keyboard);
 			}
 			else{
 				//System.out.println();
@@ -100,8 +106,46 @@ public class Text_File_Fun {
 		
 	}
 	
+	private static String search(Scanner s){
+		return null;
+	}
 	
-	private static Map get_Words_Map(File file) throws FileNotFoundException{
+	private static void letters_and_frequency(Scanner s, File file) throws FileNotFoundException{
+		Boolean _file = file_or_no(s);
+		Map theMap = get_Letters_Map(file);
+		if(_file){
+			PrintWriter f = new PrintWriter(System.getProperty("user.home") + "/Desktop/letters_and_frequency.txt");
+
+		}
+	}
+	
+	private static void words__and_frequency(Scanner s, File file) throws FileNotFoundException{
+		Boolean _file = file_or_no(s);
+		Map<String, Integer> theMap = get_Words_Map(file);
+		if(_file){
+			PrintWriter f = new PrintWriter(System.getProperty("user.home") + "/Desktop/words_and_frequency.txt");
+			f.println("Words | Frequency");
+			Iterator<String> it = theMap.keySet().iterator();
+			while(it.hasNext()){
+				String key = (String) it.next();
+				int value = (int) theMap.get(key);
+				f.println(key + " | " + value);
+			}
+			f.close();
+		}else{
+			System.out.println("Words | Frequency");
+			Iterator it = theMap.keySet().iterator();
+			while(it.hasNext()){
+				String key = (String) it.next();
+				int value = (int) theMap.get(key);
+				System.out.println(key + " | " + value);
+			}
+			
+		}
+	}
+	
+	
+	private static Map<String, Integer> get_Words_Map(File file) throws FileNotFoundException{
 		Map<String, Integer> theMap = new HashMap<String, Integer>();
 		Scanner sc = new Scanner(file);
 		
@@ -145,7 +189,7 @@ public class Text_File_Fun {
 	private static void file_extn_list(Scanner s) throws FileNotFoundException{
 		Boolean _file = file_or_no(s);
 		Text_File_Formats alpha = new Text_File_Formats();
-		if(_file == true){
+		if(_file){
 			alpha.all_extns_to_file();
 		}else{
 			alpha.print_all_extns();
@@ -166,7 +210,7 @@ public class Text_File_Fun {
 		boolean file = false;
 		int response;
 		do{
-			response = getInt(s, "Select 1 for a file version or select 2 to see the list here:");
+			response = getInt(s, "Select 1 for a file version or select 2 to see the list here: ");
 			System.out.println(response);
 		}while(response != 1 && response != 2);
 		if(response == 1)
@@ -223,9 +267,9 @@ public class Text_File_Fun {
 		System.out.println("Enter " + GET_FILE + " to retreive the file to evaluate.");
 		System.out.println("Enter " + EXTN + " to see the file extenstion that we detected.");
 		System.out.println("Enter " + EXTN_LIST + " to see a list of viable file extensions.");
-		System.out.println("Enter " + SEARCH + " to search for a particular word in this document.");
-		System.out.println("Enter " + LETTERS_AND_FREQ + " to see a list of letters and their frequency.");
 		System.out.println("Enter " + WORDS_AND_FREQ + " to see a list of words and their frequency.");
+		System.out.println("Enter " + LETTERS_AND_FREQ + " to see a list of letters and their frequency.");
+		System.out.println("Enter " + SEARCH + " to search for a particular word in this document.");		
 		System.out.println("Enter " + QUIT + " to quit.\n");
 	}
 	
