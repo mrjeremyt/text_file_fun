@@ -37,7 +37,7 @@ class Text_File_Formats{
 	
 	protected void all_extns_to_file() throws FileNotFoundException{
 		Scanner sc = new Scanner(file_extensions);
-		PrintWriter file = new PrintWriter("viable_file_extensions.txt");
+		PrintWriter file = new PrintWriter("C:/Users/Jeremy/Desktop/viable_file_extensions.txt");
 		while(sc.hasNextLine()){
 			file.println(sc.nextLine());
 		}
@@ -100,6 +100,48 @@ public class Text_File_Fun {
 		
 	}
 	
+	
+	private static Map get_Words_Map(File file) throws FileNotFoundException{
+		Map<String, Integer> theMap = new HashMap<String, Integer>();
+		Scanner sc = new Scanner(file);
+		
+		while( sc.hasNextLine() ){
+			String line = sc.nextLine();
+			String[]tokens = line.split(" |\\.|\\,");
+			for(int i = 0; i < tokens.length; i++){
+				String tmp = tokens[i];
+				if(theMap.containsKey(tmp)){
+					theMap.put(tmp, theMap.get(tmp) + 1);
+				}else{
+					theMap.put(tmp, 1);
+				}
+			}
+		}
+		sc.close();
+		
+		return theMap;
+	}
+	
+	private static Map get_Letters_Map(File file) throws FileNotFoundException{
+		Map<String, Integer> theMap = new HashMap<String, Integer>();
+		Scanner sc = new Scanner(file);
+		
+		while( sc.hasNextLine() ){
+			String line = sc.nextLine();
+			String[] tokens = line.split("(?<!^)");
+			for(int i = 0; i < tokens.length; i++){
+				String tmp = tokens[i];
+				if(theMap.containsKey(tmp)){
+					theMap.put(tmp, theMap.get(tmp) + 1);
+				}else{
+					theMap.put(tmp, 1);
+				}
+			}
+		}
+		sc.close();
+		return theMap;
+	}
+	
 	private static void file_extn_list(Scanner s) throws FileNotFoundException{
 		Boolean _file = file_or_no(s);
 		Text_File_Formats alpha = new Text_File_Formats();
@@ -124,7 +166,7 @@ public class Text_File_Fun {
 		boolean file = false;
 		int response;
 		do{
-			response = getInt(s, "Select 1 for a file and select 2 to see the list here.");
+			response = getInt(s, "Select 1 for a file version or select 2 to see the list here:");
 			System.out.println(response);
 		}while(response != 1 && response != 2);
 		if(response == 1)
