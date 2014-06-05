@@ -86,10 +86,10 @@ public class Text_File_Fun {
 				file_extn_list(keyboard);
 			}else if(choice == WORDS_AND_FREQ){
 				words__and_frequency(keyboard, file);
-			}else if(choice ==LETTERS_AND_FREQ){
+			}else if(choice == LETTERS_AND_FREQ){
 				letters_and_frequency(keyboard, file);
 			}else if(choice == SEARCH){
-				search(keyboard);
+				search(keyboard, file);
 			}
 			else{
 				//System.out.println();
@@ -106,8 +106,17 @@ public class Text_File_Fun {
 		
 	}
 	
-	private static String search(Scanner s){
-		return null;
+	private static void search(Scanner s, File file) throws FileNotFoundException{
+		System.out.print("Enter the word you would like to search for: ");
+		String word = (String )s.next();
+		Map theMap = get_Words_Map(file);
+		boolean here = theMap.containsKey(word);
+		if(here){
+			System.out.println(word + " is a valid word and is used " + theMap.get(word) + " times.");
+		}else{
+			System.out.println(word + " is not a word in this document.");
+		}
+		
 	}
 	
 	private static void letters_and_frequency(Scanner s, File file) throws FileNotFoundException{
@@ -115,7 +124,22 @@ public class Text_File_Fun {
 		Map theMap = get_Letters_Map(file);
 		if(_file){
 			PrintWriter f = new PrintWriter(System.getProperty("user.home") + "/Desktop/letters_and_frequency.txt");
-
+			f.println("Letters - Frequency");
+			Iterator<String> it = theMap.keySet().iterator();
+			while(it.hasNext()){
+				String key = (String) it.next();
+				int value = (int) theMap.get(key);
+				f.println(key + " - " + value);
+			}
+			f.close();
+		}else{
+			System.out.println("Words | Frequency");
+			Iterator it = theMap.keySet().iterator();
+			while(it.hasNext()){
+				String key = (String) it.next();
+				int value = (int) theMap.get(key);
+				System.out.println(key + " | " + value);
+			}
 		}
 	}
 	
@@ -124,12 +148,12 @@ public class Text_File_Fun {
 		Map<String, Integer> theMap = get_Words_Map(file);
 		if(_file){
 			PrintWriter f = new PrintWriter(System.getProperty("user.home") + "/Desktop/words_and_frequency.txt");
-			f.println("Words | Frequency");
+			f.println("Words - Frequency");
 			Iterator<String> it = theMap.keySet().iterator();
 			while(it.hasNext()){
 				String key = (String) it.next();
 				int value = (int) theMap.get(key);
-				f.println(key + " | " + value);
+				f.println(key + " - " + value);
 			}
 			f.close();
 		}else{
@@ -253,7 +277,7 @@ public class Text_File_Fun {
 	private static int getChoice(Scanner keyboard) {
 		int choice = getInt(keyboard, "Enter choice: ");
 		keyboard.nextLine();
-		while( choice < QUIT || choice > WORDS_AND_FREQ){
+		while( choice < QUIT || choice > SEARCH){
 			System.out.println("\n" + choice + " is not a valid choice");
 			choice = getInt(keyboard, "Enter choice: ");
 			keyboard.nextLine();
